@@ -3,7 +3,7 @@ title: Dense Bean Salad
 description: A fresh, hearty bean salad perfect for meal prep and serving with lettuce boats.
 prepTime: 30
 cookTime: 0
-servings: 10 - 15
+servings: 15
 tags: [salad, meal-prep, mediterranean]
 
 ingredients:
