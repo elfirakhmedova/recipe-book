@@ -14,7 +14,7 @@ ingredients:
   - Cilantro
   - 1 to 2 bell peppers
   - Tomatoes
-  
+
 dressing:
   - Honey (optional)
   - 3/4 packet taco seasoning
