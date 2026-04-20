@@ -18,7 +18,7 @@ const { title, description, prepTime, cookTime, servings, tags } = recipe.data;
 ---
 
 <li class="card recipe-card">
-    <a href={`/recipes/${recipe.slug}/`}>
+    <a href={`${import.meta.env.BASE_URL}recipes/${recipe.slug}/`}>
         <p class="eyebrow" style="margin-bottom: 0.55rem;">Recipe</p>
         <h3 class="recipe-card-title">{title}</h3>
         <p class="recipe-card-desc">{description}</p>

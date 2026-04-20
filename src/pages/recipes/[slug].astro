@@ -17,8 +17,9 @@ const { title, description, prepTime, cookTime, servings, tags } = recipe.data;
 
 <BaseLayout title={`${title} | Recipe Book`}>
     <main>
-        <a href="/" class="button-link">← Back to all recipes</a>
-
+        <a href={import.meta.env.BASE_URL} class="button-link"
+            >← Back to all recipes</a
+        >
         <article style="margin-top: 1rem;">
             <header class="card recipe-hero">
                 <div class="recipe-hero-top">
