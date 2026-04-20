@@ -1,0 +1,36 @@
+---
+interface Props {
+    recipe: {
+        slug: string;
+        data: {
+            title: string;
+            description: string;
+            prepTime: number;
+            cookTime: number;
+            servings: number;
+            tags: string[];
+        };
+    };
+}
+
+const { recipe } = Astro.props as Props;
+const { title, description, prepTime, cookTime, servings, tags } = recipe.data;
+---
+
+<li class="card recipe-card">
+    <a href={`/recipes/${recipe.slug}/`}>
+        <p class="eyebrow" style="margin-bottom: 0.55rem;">Recipe</p>
+        <h3 class="recipe-card-title">{title}</h3>
+        <p class="recipe-card-desc">{description}</p>
+    </a>
+
+    <div class="recipe-meta">
+        <span class="recipe-meta-chip">Prep {prepTime} min</span>
+        <span class="recipe-meta-chip">Cook {cookTime} min</span>
+        <span class="recipe-meta-chip">Serves {servings}</span>
+    </div>
+
+    <ul class="tag-list">
+        {tags.map((tag) => <li class="tag">{tag}</li>)}
+    </ul>
+</li>

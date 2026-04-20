@@ -1,0 +1,97 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+    const recipes = await getCollection("recipes");
+
+    return recipes.map((recipe) => ({
+        params: { slug: recipe.slug },
+        props: { recipe },
+    }));
+}
+
+const { recipe } = Astro.props;
+const { title, description, prepTime, cookTime, servings, tags } = recipe.data;
+---
+
+<BaseLayout title={`${title} | Recipe Book`}>
+    <main>
+        <a href="/" class="button-link">← Back to all recipes</a>
+
+        <article style="margin-top: 1rem;">
+            <header class="card recipe-hero">
+                <div class="recipe-hero-top">
+                    <div>
+                        <span class="eyebrow">Recipe</span>
+                        <h1 class="page-title">{title}</h1>
+                        <p class="page-intro">{description}</p>
+                    </div>
+                </div>
+
+                <div class="recipe-meta" style="margin-top: 1.25rem;">
+                    <span class="recipe-meta-chip">Prep {prepTime} min</span>
+                    <span class="recipe-meta-chip">Cook {cookTime} min</span>
+                    <span class="recipe-meta-chip">Serves {servings}</span>
+                </div>
+
+                <ul class="tag-list">
+                    {tags.map((tag) => <li class="tag">{tag}</li>)}
+                </ul>
+            </header>
+
+            <div class="recipe-body">
+                <aside class="card recipe-sidebar">
+                    <p class="recipe-section-label">At a glance</p>
+                    <div class="recipe-meta">
+                        <span class="recipe-meta-chip">Prep {prepTime} min</span
+                        >
+                        <span class="recipe-meta-chip">Cook {cookTime} min</span
+                        >
+                        <span class="recipe-meta-chip">Serves {servings}</span>
+                    </div>
+
+                    <p class="recipe-section-label">Tags</p>
+                    <ul class="tag-list">
+                        {tags.map((tag) => <li class="tag">{tag}</li>)}
+                    </ul>
+                </aside>
+
+                <section class="card recipe-content">
+                    <div>
+                        <p class="recipe-section-label">Ingredients</p>
+                        <ul>
+                            {
+                                recipe.data.ingredients.map((item) => (
+                                    <li>{item}</li>
+                                ))
+                            }
+                        </ul>
+                    </div>
+
+                    <div>
+                        <p class="recipe-section-label">Dressing</p>
+                        <ul>
+                            {
+                                recipe.data.dressing.map((item) => (
+                                    <li>{item}</li>
+                                ))
+                            }
+                        </ul>
+                    </div>
+
+                    <div>
+                        <p class="recipe-section-label">Instructions</p>
+                        <ol>
+                            {
+                                recipe.data.instructions.map((step) => (
+                                    <li>{step}</li>
+                                ))
+                            }
+                        </ol>
+                    </div>
+                </section>
+            </div>
+        </article>
+    </main>
+</BaseLayout>

@@ -1,13 +1,36 @@
 ---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import RecipeCard from "../components/RecipeCard.astro";
+
+const recipes = await getCollection("recipes");
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Recipe Book</title>
-  </head>
-  <body>
-    <h1>Elfira's Recipe Book</h1>
-    <p>A collection of my favorite recipes for friends and family.</p>
-  </body>
-</html>
+<BaseLayout title="Recipe Book">
+  <main>
+    <section class="card section-card">
+      <span class="eyebrow">Welcome In</span>
+      <h2 class="page-title">A digital cookbook full of comfort, color, and flavor.</h2>
+      <p class="page-intro">
+        A home for meal prep favorites, family-style dishes, and Mediterranean-inspired recipes
+        that feel warm, simple, and beautiful.
+      </p>
+    </section>
+
+    <section style="margin-top: 1.5rem;">
+      <div style="display: flex; justify-content: space-between; align-items: end; gap: 1rem; flex-wrap: wrap;">
+        <div>
+          <span class="eyebrow">Browse</span>
+          <h2 style="margin: 0; font-size: clamp(1.7rem, 3vw, 2.4rem);">All Recipes</h2>
+        </div>
+        <p class="muted" style="margin: 0;">{recipes.length} recipe{recipes.length === 1 ? "" : "s"}</p>
+      </div>
+
+      <ul class="recipe-grid">
+        {recipes.map((recipe) => (
+          <RecipeCard recipe={recipe} />
+        ))}
+      </ul>
+    </section>
+  </main>
+</BaseLayout>
